@@ -3,7 +3,8 @@
 export default class CreateElement {
 
     createBody(){
-
+        // Создаю <div> тела 
+        let divBody = '';
     }
     
     // Создание html блока сообщения
