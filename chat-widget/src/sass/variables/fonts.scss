@@ -1,0 +1,65 @@
+@font-face {
+    font-family: 'muli';
+    src: url('../assets/fonts/muli-regular.woff2') format('woff2'),
+         url('../assets/fonts/muli-regular.woff') format('woff'),
+         url('../assets/fonts/muli-regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'montserrat';
+    src: url('../assets/fonts/montserrat-regular.woff2') format('woff2'),
+         url('../assets/fonts/montserrat-regular.woff') format('woff'),
+         url('../assets/fonts/montserrat-regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'montserrat';
+    src: url('../assets/fonts/montserrat-medium.woff2') format('woff2'),
+         url('../assets/fonts/montserrat-medium.woff') format('woff'),
+         url('../assets/fonts/montserrat-medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'montserrat';
+    src: url('../assets/fonts/montserrat-semibold.woff2') format('woff2'),
+         url('../assets/fonts/montserrat-semibold.woff') format('woff'),
+         url('../assets/fonts/montserrat-semibold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'montserrat';
+    src: url('../assets/fonts/montserrat-bold.woff2') format('woff2'),
+         url('../assets/fonts/montserrat-bold.woff') format('woff'),
+         url('../assets/fonts/montserrat-bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'montserrat';
+    src: url('../assets/fonts/montserrat-black.woff2') format('woff2'),
+         url('../assets/fonts/montserrat-black.woff') format('woff'),
+         url('../assets/fonts/montserrat-black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'playfairdisplay';
+    src: url('../assets/fonts/playfairdisplay-regular.woff2') format('woff2'),
+         url('../assets/fonts/playfairdisplay-regular.woff') format('woff'),
+         url('../assets/fonts/playfairdisplay-regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+$main-font: 'muli', sans-serif;

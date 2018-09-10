@@ -1,0 +1,197 @@
+.values {
+    padding-top: 57px;
+    background-image: url(../assets/img/bg-graph.png);
+    background-repeat: no-repeat;
+    background-position: 142% -21%;
+
+    &__title {
+        text-transform: uppercase;
+        font-size: 22px;
+        font-family: 'montserrat';
+        font-weight: 700;
+        color: #424242;
+        margin: 0 0 26px;
+        letter-spacing: -.4px;
+        padding-right: 14px;
+        padding-left: 3px;
+    }
+
+    &__desc {
+        font-size: 13px;
+        line-height: 1.85;
+        color: #8c8c8c;
+        letter-spacing: 0.65px;
+        margin: 0 0 60px;
+        max-width: 722px;
+        padding-left: 4px;
+    }
+
+    &__img {
+        position: absolute;
+        bottom: 0;
+        left: -181px;
+    }
+
+    &__graph {
+        position: relative;
+        height: 441px;
+
+        &-img-wrap {
+            position: absolute;
+            top: 11px;
+            left: 50%;
+            transform: translateX(-176px);
+        }
+
+        &-value {
+            width: 200px;
+            font-size: 13px;
+            line-height: 1.85;
+            color: #8c8c8c;
+            letter-spacing: .6px;
+            margin: 0;
+            position: absolute;
+
+            &:before {
+                content: '';
+                width: 18px;
+                height: 18px;
+                border: 4px solid $active-color;
+                position: absolute;
+                border-radius: 50%;
+                background-color: $bg-graph-value;
+                top: -29px;
+                left: 82px;
+            }
+
+            &:after {
+                content: '';
+                position: absolute;
+                top: -20px;
+                right: -30px;
+                height: 2px;
+                background-color: $active-color;
+                width: 132px;
+            }
+
+            &--1 {
+                top: 74px;
+                left: 4px;
+            }
+
+            &--2 {
+                bottom: 97px;
+                left: 124px;
+
+                &:before {
+                    left: 52px;
+                }
+
+                &:after {
+                    right: 28px;
+                    width: 103px;
+                    top: -19px;
+                }
+            }
+
+            &--3 {
+                bottom: 227px;
+                right: 40px;
+
+                &:after {
+                    right: 116px;
+                    width: 109px;
+                    top: -24px;
+                }
+
+            }
+
+            &--num {
+                font-size: 38px;
+                color: $active-color;
+                position: absolute;
+                top: -2px;
+                left: 100px;
+                letter-spacing: 0.9px;
+            }
+
+
+        }
+    }
+
+    &__company {
+        font-size: 30px;
+        color: $active-color;
+        position: absolute;
+        top: 58px;
+        right: 263px;
+        letter-spacing: -1.5px;
+
+        &-subtitle {
+            font-size: 12px;
+            color: gray;
+            position: absolute;
+            top: 92px;
+            right: 334px;
+            letter-spacing: 0.1px;
+        }
+    }
+    
+}
+
+.values__img-wrap {
+    position: relative;
+    height: 624px;
+
+}
+
+
+@media (max-width: 1200px) {
+    .values__graph {
+        height: 417px;
+    }
+
+    .values__graph-value--1 {
+        top: -46px;
+        left: 6px;
+
+        &:before {
+            top: 82px;
+        }
+
+        &:after {
+            top: 90px;
+            width: 90px;
+            right: 14px;
+        }
+    }
+
+    .values__graph-value--2 {
+        bottom: 68px;
+        left: 54px;
+    }
+
+    .values__graph-value--3 {
+        bottom: 203px;
+        right: -11px;
+    }
+
+    .values__graph-value--num {
+        top: 56px;
+        left: 30px;
+    }
+
+    .values__company-subtitle {
+        top: 92px;
+        right: 253px;
+    }
+ 
+    .values__company {
+        top: 58px;
+        right: 178px;
+    }
+
+}
+
+
+

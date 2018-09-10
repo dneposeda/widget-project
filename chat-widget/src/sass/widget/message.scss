@@ -1,0 +1,56 @@
+.spchat {
+    &__massage {
+        color: #f0f1f1;
+        border-radius: 3px;
+        background-color: #e4eefd;
+        width: 80%;
+        max-width: 210px;
+        padding: 7px 11px;
+        margin: 5px 0;
+        margin-right: 11px;
+        
+        animation-duration: 0.4s;
+        animation-timing-function: cubic-bezier(0, 0.79, 0.34, 1.38);
+
+        &:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+        
+
+        &--manager {
+            position: relative;
+            background-color: #3cb868;
+            float: left;
+            text-align: left;
+            margin-left: 11px;
+            animation-name: showMsgMng;
+
+            &:after {
+                left: -5px;
+                top: 5px;
+                border-right: 5px solid #3cb868;
+            }
+        }
+
+        &--user {
+            position: relative;
+            background-color: #e4eefd;
+            float: right;
+            color: #414243;
+            text-align: right;
+            margin-right: 11px;
+            animation-name: showMsgUser;
+
+            &:after {
+                right: -5px;
+                top: 5px;
+                border-left: 5px solid #e4eefd;
+            }
+        }
+    }
+}
