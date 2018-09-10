@@ -43,7 +43,7 @@ export default class Widget {
                     showMessage(divMsg);
 
                     // Добавляю в массив сообщение
-                    messageArray.push({name: 'manager', msg: msgText})
+                    messageArray.push({name: 'manager', msg: 'Здравствуйте! Чем я могу вам помочь?'})
                     }, 700);
 
                 }

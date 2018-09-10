@@ -158,7 +158,13 @@ var CreateElement = function () {
 
     _createClass(CreateElement, [{
         key: 'createBody',
-        value: function createBody() {}
+        value: function createBody() {
+            // Создаю <div> тела 
+            var divBody = '';
+        }
+
+        // Создание html блока сообщения
+
     }, {
         key: 'createMessage',
         value: function createMessage(user, text) {
@@ -275,6 +281,7 @@ var Widget = function () {
                         // Класс создания html элементов
                         var сreateElement = new _CreateElement2.default();
 
+                        // Упрощаю поиск элемента
                         function getElem(id) {
                                 return document.getElementById(id);
                         }
@@ -282,20 +289,29 @@ var Widget = function () {
                         function eventOpenChat() {
                                 // проверка, открыт ли чат
                                 if (!chatOpen) {
+
                                         //удаляю класс
                                         chatId.classList.remove('spchat-hidden');
+
                                         // меняю флаг на открыт
                                         chatOpen = true;
+
                                         // удаляю прослушку события по header чата
                                         chatIdHead.removeEventListener('click', eventOpenChat);
+
                                         // вешаю прослушку события на кпонку закрытие
                                         chatIdClose.addEventListener('click', eventCloseChat);
 
                                         if (messageArray.length === 0) {
                                                 setTimeout(function () {
-                                                        /*************************/
+
                                                         var divMsg = сreateElement.createMessage(false, 'Здравствуйте! Чем я могу вам помочь?');
+
+                                                        // Показываю сообщение
                                                         showMessage(divMsg);
+
+                                                        // Добавляю в массив сообщение
+                                                        messageArray.push({ name: 'manager', msg: 'Здравствуйте! Чем я могу вам помочь?' });
                                                 }, 700);
                                         }
 
@@ -306,12 +322,16 @@ var Widget = function () {
                         function eventCloseChat() {
                                 // проверка, открыт ли чат
                                 if (chatOpen) {
+
                                         //Добавляю класс
                                         chatId.classList.add('spchat-hidden');
+
                                         // меняю флаг на закрыт
                                         chatOpen = false;
+
                                         // удаляю прослушку события на кпонку закрытие
                                         chatIdClose.removeEventListener('click', eventCloseChat);;
+
                                         // вешаю прослушку события по header чата
                                         chatIdHead.addEventListener('click', eventOpenChat);
 
@@ -320,42 +340,20 @@ var Widget = function () {
                         }
 
                         function getMessage() {}
-                        /************* */
-                        // function createElemMessage(user, text){
-
-                        //     // Создаю <div>
-                        //     let divChild = document.createElement('div');
-                        //     /**
-                        //      * Условия от кого сообщение (true/false)
-                        //      * взависимости от кого, добаляю разные css классы
-                        //      */ 
-                        //     if(user){
-                        //     divChild.className = 'spchat__massage spchat__massage--user';
-                        //     } else {
-                        //     divChild.className = 'spchat__massage spchat__massage--manager';
-                        //     }
-                        //     // В дочерний <div> вставляю текст сообщения
-                        //     divChild.innerHTML = text;
-
-                        //     return divChild;
-                        // }
-
 
                         function showMessage(createdElem) {
                                 // Поиск элемента куда вставить 
                                 var divMsg = getElem('spchat__massages');
+
                                 // Вставляю в конец всех элементов в родителе
                                 divMsg.appendChild(createdElem);
                         }
-
-                        // random
-
 
                         function replyAi() {
                                 setTimeout(function () {
                                         // генерирую случайное число, по которому выбираю сообщение из массива
                                         var msgText = arrayMesgAi[randomMessage.random(arrayMesgAi.length - 1)];
-                                        /******************************/
+
                                         // создаю HTML сообщения
                                         var msg = сreateElement.createMessage(false, msgText);
 
@@ -430,6 +428,7 @@ var Widget = function () {
 
                         // Устанавливаю событие на Enter в поле textarea
                         var sendMessage = getElem('sendMessage');
+
                         // Вешаю событиние на Enter
                         sendMessage.addEventListener('keydown', function (e) {
 
@@ -441,7 +440,6 @@ var Widget = function () {
                                         // Если сообщение пустое
                                         if (this.value !== '') {
 
-                                                /****************************/
                                                 // Создаю html разметку с собщением 
                                                 var msg = сreateElement.createMessage(true, this.value);
                                                 // 
