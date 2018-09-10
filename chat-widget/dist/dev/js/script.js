@@ -160,7 +160,7 @@ var CreateElement = function () {
         key: 'createBody',
         value: function createBody() {
             // Создаю <div> тела 
-            var divBody = '';
+            var divBody = document.createElement('div');
         }
 
         // Создание html блока сообщения
