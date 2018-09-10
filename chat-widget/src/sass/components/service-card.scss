@@ -1,0 +1,146 @@
+.service-card {
+        margin-bottom: -71px;
+
+    &__title{
+        font-family: 'montserrat';
+        font-weight: 700;
+        font-size: 18px;
+        color: $service-header-font-color;
+        text-transform: uppercase;
+        margin: 0 0 8px;
+        letter-spacing: -0.3px;
+    }
+
+    &__subtitle {
+        display: block;
+        font-family: 'montserrat';
+        font-weight: 700;
+        font-size: 13px;
+        color: $service-header-font-color;
+        margin-bottom: 21px;
+        letter-spacing: -0.85px;
+    }
+
+    &__text {
+        font-size: 13px;
+        line-height: 1.85;
+        color: $service-text-font-color;
+        letter-spacing: 0.1px;
+        margin: 0;
+    }
+
+    &__bg {
+        background-repeat: no-repeat;
+        background-position: top center;
+        height: 236px;
+
+        &--finan {
+            background-image: url(../assets/img/service-01.jpg);
+            margin-left: -5px;
+        }
+
+        &--stocks {
+            background-image: url(../assets/img/service-02.jpg);
+            margin-left: -9px;
+        }
+        &--cash {
+            background-image: url(../assets/img/service-03.jpg);
+            margin-left: -13px;
+        }
+        &--invest {
+            background-image: url(../assets/img/service-04.jpg);
+            margin-left: -5px;
+        }
+        &--personal {
+            background-image: url(../assets/img/service-05.jpg);
+            margin-left: -9px;
+        }
+        &--insurance {
+            background-image: url(../assets/img/service-06.jpg);
+            margin-left: -13px;
+        }
+    }
+
+    &__block {
+        border-width: 1px;
+        border-style: solid;
+        border-image: linear-gradient(to bottom,#d9d9d9,transparent) 1 48%;
+        width: 311px;
+        padding: 25px 22px;
+        margin-left: 32px;
+        background-color: white;
+        transform: translateY(-90px);
+
+        &--stocks {
+            margin-left: 30px;
+        }
+
+        &--cash {
+            margin-left: 28px;
+        }
+
+        &--personal {
+            margin-left: 30px;
+        }
+
+        &--insurance {
+            margin-left: 28px;
+        }
+
+
+    }
+
+
+}
+
+
+@media (max-width: 1200px) {
+    .service-card__block {
+        margin: 0 auto;
+    
+        &--stocks {
+            margin: 0 auto;
+        }
+    
+        &--cash {
+            margin: 0 auto;
+        }
+    
+        &--personal {
+            margin: 0 auto;
+        }
+    
+        &--insurance {
+            margin: 0 auto;
+        }
+    }
+
+    .service-card__bg {
+                
+        &--finan {
+            margin-left: 0;
+        }
+
+        &--stocks {
+            margin-left: 0
+        }
+
+        &--cash {
+            margin-left: 0
+        }
+
+        &--invest {
+            margin-left: 0
+        }
+
+        &--personal {
+            margin-left: 0
+        }
+
+        &--insurance {
+            margin-left: 0
+        }
+    }
+
+    
+}

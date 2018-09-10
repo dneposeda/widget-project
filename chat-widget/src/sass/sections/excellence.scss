@@ -1,0 +1,143 @@
+.excellence {
+    
+
+    &__block {
+        margin: 0 6px 0 0;
+        transform: translateY(-80px);
+    }
+
+    &__item {
+        padding-left: 80px;
+        background-repeat: no-repeat;
+        background-position: 10px 4px;
+        margin-bottom: 41px;
+        margin-left: 3px;
+
+        &--icon-1 {
+            background-image: url(../assets/img/how-icon-1.png);
+        }
+
+        &--icon-2 {
+            background-image: url(../assets/img/how-icon-2.png);
+            padding-left: 68px;
+        }
+
+        &--icon-3 {
+            background-image: url(../assets/img/how-icon-3.png);
+        }
+
+        &--icon-4 {
+            background-image: url(../assets/img/how-icon-4.png);
+            background-position: 1px 4px;
+            padding-left: 68px;
+        }
+    }
+
+    &__block-info {
+        background-color: #009688;
+        position: relative;
+        margin-right: -11px;
+        padding-left: 36px;
+        padding-top: 113px;
+        text-align: justify;
+        background-image: url(../assets/img/bg-poligon.jpg);
+        background-repeat: no-repeat;
+        background-position: left bottom;
+    }
+
+    &__info {
+        text-transform: uppercase;
+        font-size: 19px;
+        font-family: 'montserrat';
+        font-weight: 700;
+        color: #fff;
+        margin: 0 0 24px;
+        letter-spacing: 0.15px;
+        line-height: 1.8;
+        padding-left: 3px;
+        max-width: 294px;
+        text-align: left;
+        
+    }
+
+    &__info-text {
+        font-size: 13px;
+        line-height: 1.85;
+        color: #fff;
+        letter-spacing: 0.7px;
+        padding-left: 4px;
+        margin: 0 0 50px;
+        max-width: 294px;
+    }
+
+    &__list {
+        padding: 120px 0 112px 4px;
+        background-color: $white;
+        box-shadow: 5px 5px 50px 0px rgba(173, 173, 173, 0.32);
+    }
+
+    &__title {
+        text-transform: uppercase;
+        font-size: 17px;
+        font-family: 'montserrat';
+        font-weight: 700;
+        color: #424242;
+        margin: 0 0 25px;
+        letter-spacing: 0.3px;
+        padding-left: 3px;
+        background-color: white;
+    }
+
+    &__desc {
+        font-size: 13px;
+        line-height: 1.8;
+        color: #8c8c8c;
+        letter-spacing: .65px;
+        max-width: 278px;
+        padding-left: 4px;
+        margin: 0;
+    }
+
+    &__link {
+        position: absolute;
+        bottom: 26px;
+        left: 0;
+        text-align: left;
+    }
+
+
+}
+
+@media (max-width: 1200px) {
+
+    .excellence__block-info {
+        margin-right: 0;
+        padding-right: 37px;
+        padding-left: 25px;
+        padding-top: 73px;
+    }
+
+    .excellence__list {
+        padding: 80px 0 42px 4px;
+    }
+}
+
+@media (max-width: 992px) {
+
+    .excellence__block-info {
+        background-position: right bottom;
+    }
+
+    .excellence__info {
+        max-width: 524px;
+    }
+
+    .excellence__info-text {
+        margin: 0 0 93px;
+        max-width: 482px;
+    }
+}
+
+
+
+

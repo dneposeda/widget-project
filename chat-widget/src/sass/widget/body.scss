@@ -1,0 +1,102 @@
+
+
+.spchat {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    right: 30px;
+    bottom: 10px;
+    width: 300px;
+    height: 400px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 0 12px 25px 8px rgba(0,0,0,0.17);
+    transition: all .3s cubic-bezier(.39, .24, .21, .99);
+    transform-origin: 0 100%;
+    overflow: hidden;
+    
+    &__close {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        right: 5px;
+        top: 5px;
+        cursor: pointer;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        background-color: #23283c;
+        border-radius: 3px 3px 0 0;
+        color: #f0f1f1;
+        padding: 20px;
+        min-height: 75px;
+    }
+
+    &__photo {
+        display: block;
+        border-radius: 50%;
+        margin-right: 20px;
+        height: 50px;
+        width: 50px;
+    }
+
+    &__manager-name {
+        margin-bottom: 5px;
+    }
+
+    &__manager-position {
+        font-size: 12px;
+        opacity: 0.7;
+    }
+
+    &__body {
+        background-color: #fff;
+        height: 245px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        padding: 10px 5px;
+
+    }
+
+    &__massage-wrap {
+        position: relative;
+        margin: 5px 0;
+        
+        &:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0;
+        }
+    }
+
+    &__footer {
+        min-height: 80px;
+        background-color: #eef1f5;
+        padding: 10px 15px;
+    }
+
+
+    &__textarea {
+        height: 60px;
+        padding: 5px;
+        overflow: hidden;
+        overflow-y: auto;
+        width: 270px;
+        border: 1px solid #299f53;
+        border-radius: 3px;
+        resize: none;
+        color: #545d6b;
+        margin-bottom: 10px;
+        line-height: 15px;
+    }
+}
+
+.spchat-hidden {
+    bottom: -330px;
+    cursor: pointer;
+}

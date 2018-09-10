@@ -1,0 +1,32 @@
+.slider {
+    color: $white;
+    padding-top: 288px;
+
+    &__title {
+        font-family: 'montserrat';
+        font-size: 56px;
+        text-transform: uppercase;
+        font-weight: 900;
+        max-width: 694px;
+        line-height: 1.35;
+        margin: 0 0 20px 7px;
+        letter-spacing: -2px;
+    }
+
+    &__desc {
+        font-size: 13px;
+        line-height: 1.8;
+        letter-spacing: .65px;
+        margin: 0 0 50px 7px;
+        max-width: 694px;
+
+    }
+
+    &__subtitle {
+        font-family: 'playfairdisplay';
+        margin-left: 6px;
+        font-size: 30px;
+        margin-bottom: 11px;
+    }
+}
+
