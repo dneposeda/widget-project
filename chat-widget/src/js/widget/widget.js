@@ -2,17 +2,24 @@
 
 import RandomMessage from './RandomMessage';
 import CreateElement from './CreateElement';
+import ShowMessage from './ShowMessage';
 
 export default class Widget {
 
     init(){
 
         // Класс генерации чисел 
-        let randomMessage = new RandomMessage;
+        let randomMessage = new RandomMessage();
 
         // Класс создания html элементов
-        let сreateElement = new CreateElement;
+        let сreateElement = new CreateElement();
+
+        // Класс показа сообщений в чате
+        let showMessage = new ShowMessage();
         
+        // Создаю HTML скилет чата 
+        сreateElement.createBody();
+
         // Упрощаю поиск элемента
         function getElem(id) {
             return document.getElementById(id);
@@ -22,7 +29,7 @@ export default class Widget {
             // проверка, открыт ли чат
             if (!chatOpen) {
 
-                //удаляю класс
+                // удаляю класс
                 chatId.classList.remove('spchat-hidden');
 
                 // меняю флаг на открыт
@@ -37,13 +44,13 @@ export default class Widget {
                 if (messageArray.length === 0) {
                     setTimeout(function(){
                     
-                    let divMsg = сreateElement.createMessage(false, 'Здравствуйте! Чем я могу вам помочь?');
-                    
-                    // Показываю сообщение
-                    showMessage(divMsg);
+                        let divMsg = сreateElement.createMessage(false, 'Здравствуйте! Чем я могу вам помочь?');
+                        
+                        // Показываю сообщение
+                        showMessage.show(divMsg);
 
-                    // Добавляю в массив сообщение
-                    messageArray.push({name: 'manager', msg: 'Здравствуйте! Чем я могу вам помочь?'})
+                        // Добавляю в массив сообщение
+                        messageArray.push({name: 'manager', msg: 'Здравствуйте! Чем я могу вам помочь?'})
                     }, 700);
 
                 }
@@ -55,33 +62,21 @@ export default class Widget {
         function eventCloseChat() {
             // проверка, открыт ли чат
             if (chatOpen) {
-
+                
                 //Добавляю класс
                 chatId.classList.add('spchat-hidden');
 
                 // меняю флаг на закрыт
                 chatOpen = false;
-
+               
                 // удаляю прослушку события на кпонку закрытие
-                chatIdClose.removeEventListener('click', eventCloseChat);;
-
+                chatIdClose.removeEventListener('click', eventCloseChat);
+                
                 // вешаю прослушку события по header чата
                 chatIdHead.addEventListener('click', eventOpenChat);
 
                 console.log('Close')
             }
-        }
-
-        function getMessage(){
-
-        }
-
-        function showMessage(createdElem){
-            // Поиск элемента куда вставить 
-            let divMsg = getElem('spchat__massages');
-
-            // Вставляю в конец всех элементов в родителе
-            divMsg.appendChild(createdElem);
         }
 
         function replyAi(){
@@ -93,7 +88,7 @@ export default class Widget {
                 let msg = сreateElement.createMessage(false, msgText);
 
                 // показываю 
-                showMessage(msg);
+                showMessage.show(msg);
 
                 // Добавляю в массив сообщение
                 messageArray.push({name: 'manager', msg: msgText})
@@ -142,6 +137,7 @@ export default class Widget {
 
         // Событие на загрузку документа
         document.addEventListener('DOMContentLoaded', function(){
+
             setTimeout(function(){
                 eventOpenChat();
                 console.log('setTimeout - ok') 
@@ -154,11 +150,11 @@ export default class Widget {
         window.addEventListener("focus", function() {
 
             if (onlineUser) {
-            // Открыть чат автоматически по истечению 3,5с
-            setTimeout(function(){
-                eventOpenChat();
-                console.log('setTimeout - ok') 
-            }, 4500);
+                // Открыть чат автоматически по истечению 3,5с
+                setTimeout(function(){
+                    eventOpenChat();
+                    console.log('setTimeout - ok') 
+                }, 4500);
             }
             
             console.log('active') 
@@ -189,7 +185,7 @@ export default class Widget {
                     // Создаю html разметку с собщением 
                     let msg = сreateElement.createMessage(true, this.value);
                     // 
-                    showMessage(msg);
+                    showMessage.show(msg);
                     messageArray.push({name: 'user', msg: this.value})
                 
                     // Ответа манагера

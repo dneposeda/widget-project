@@ -159,8 +159,77 @@ var CreateElement = function () {
     _createClass(CreateElement, [{
         key: 'createBody',
         value: function createBody() {
-            // Создаю <div> тела 
+
+            var tagBody = document.body;
+
+            // Создаю <div> тела чата
+            var divChat = document.createElement('div');
+            divChat.className = 'spchat spchat-hidden';
+            divChat.setAttribute('id', 'spchat');
+
+            // Кнопка закрыть
+            var divBtnClose = document.createElement('div');
+            divBtnClose.className = 'spchat__close';
+            divBtnClose.setAttribute('id', 'spchat__close');
+            divChat.appendChild(divBtnClose);
+
+            // Секция описания менеджера
+            var divHeader = document.createElement('div');
+            divHeader.className = 'spchat__header';
+            divHeader.setAttribute('id', 'spchat__header');
+            // Обортка фото менеджера
+            var divPhotoManager = document.createElement('div');
+            divPhotoManager.className = 'spchat__photo-wrapp';
+            // Фото менеджера
+            var divPhoto = document.createElement('img');
+            divPhoto.className = 'spchat__photo';
+            divPhoto.setAttribute('src', 'assets/img/news-01.jpg');
+            divPhotoManager.appendChild(divPhoto);
+            divHeader.appendChild(divPhotoManager);
+            // Имя и должность менеджера
+            var divNameManager = document.createElement('div');
+            divNameManager.className = 'spchat__manager';
+            // Имя
+            var divName = document.createElement('div');
+            divName.className = 'spchat__manager-name';
+            divName.innerHTML = 'Артем Чичерин';
+            divNameManager.appendChild(divName);
+            // Должность
+            var divPosition = document.createElement('div');
+            divPosition.className = 'spchat__manager-position';
+            divPosition.innerHTML = 'DB Engineer';
+            divNameManager.appendChild(divPosition);
+            divHeader.appendChild(divNameManager);
+            divChat.appendChild(divHeader);
+
+            // Секция самого чата 
             var divBody = document.createElement('div');
+            divBody.className = 'spchat__body';
+            divBody.setAttribute('id', 'spchat__body');
+            // Обертка для сообщений
+            var divMsg = document.createElement('div');
+            divMsg.className = 'spchat__massages';
+            divMsg.setAttribute('id', 'spchat__massages');
+            divBody.appendChild(divMsg);
+            divChat.appendChild(divBody);
+
+            // Секция отправки сообщения
+            var divFooter = document.createElement('div');
+            divFooter.className = 'spchat__footer';
+            // Textarea отправки сообщения
+            var divFooterText = document.createElement('textarea');
+            divFooterText.className = 'spchat__textarea';
+            divFooterText.setAttribute('id', 'sendMessage');
+            divFooterText.setAttribute('placeholder', 'Введите сообщение и нажмите Enter');
+            divFooterText.setAttribute('autocomplete', 'off');
+            divFooterText.setAttribute('maxlength', '1000');
+            divFooter.appendChild(divFooterText);
+            divChat.appendChild(divFooter);
+
+            // Вставляю в конец всех элементов в родителе BODY
+            tagBody.appendChild(divChat);
+
+            return divChat;
         }
 
         // Создание html блока сообщения
@@ -171,18 +240,18 @@ var CreateElement = function () {
 
             // Создаю <div>
             var divMsg = document.createElement('div');
-
+            divMsg.classList.add('spchat__massage');
             /**
              * Условия от кого сообщение (true/false)
              * взависимости от кого, добаляю разные css классы
              */
             if (user) {
-                divMsg.className = 'spchat__massage spchat__massage--user';
+                divMsg.classList.add('spchat__massage--user');
             } else {
-                divMsg.className = 'spchat__massage spchat__massage--manager';
+                divMsg.classList.add('spchat__massage--manager');
             }
 
-            // В дочерний <div> вставляю текст сообщения
+            // В созданный <div> вставляю текст сообщения
             divMsg.innerHTML = text;
 
             return divMsg;
@@ -238,6 +307,46 @@ exports.default = RandomMessage;
 
 /***/ }),
 
+/***/ "./src/js/widget/ShowMessage.js":
+/*!**************************************!*\
+  !*** ./src/js/widget/ShowMessage.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ShowMessage = function () {
+    function ShowMessage() {
+        _classCallCheck(this, ShowMessage);
+    }
+
+    _createClass(ShowMessage, [{
+        key: 'show',
+        value: function show(createdElem) {
+            // Поиск элемента куда вставить 
+            var divMsg = document.getElementById('spchat__massages');
+            // Вставляю в конец всех элементов в родителе
+            divMsg.appendChild(createdElem);
+        }
+    }]);
+
+    return ShowMessage;
+}();
+
+exports.default = ShowMessage;
+
+/***/ }),
+
 /***/ "./src/js/widget/widget.js":
 /*!*********************************!*\
   !*** ./src/js/widget/widget.js ***!
@@ -262,6 +371,10 @@ var _CreateElement = __webpack_require__(/*! ./CreateElement */ "./src/js/widget
 
 var _CreateElement2 = _interopRequireDefault(_CreateElement);
 
+var _ShowMessage = __webpack_require__(/*! ./ShowMessage */ "./src/js/widget/ShowMessage.js");
+
+var _ShowMessage2 = _interopRequireDefault(_ShowMessage);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -281,6 +394,12 @@ var Widget = function () {
                         // Класс создания html элементов
                         var сreateElement = new _CreateElement2.default();
 
+                        // Класс показа сообщений в чате
+                        var showMessage = new _ShowMessage2.default();
+
+                        // Создаю HTML скилет чата 
+                        сreateElement.createBody();
+
                         // Упрощаю поиск элемента
                         function getElem(id) {
                                 return document.getElementById(id);
@@ -290,7 +409,7 @@ var Widget = function () {
                                 // проверка, открыт ли чат
                                 if (!chatOpen) {
 
-                                        //удаляю класс
+                                        // удаляю класс
                                         chatId.classList.remove('spchat-hidden');
 
                                         // меняю флаг на открыт
@@ -308,7 +427,7 @@ var Widget = function () {
                                                         var divMsg = сreateElement.createMessage(false, 'Здравствуйте! Чем я могу вам помочь?');
 
                                                         // Показываю сообщение
-                                                        showMessage(divMsg);
+                                                        showMessage.show(divMsg);
 
                                                         // Добавляю в массив сообщение
                                                         messageArray.push({ name: 'manager', msg: 'Здравствуйте! Чем я могу вам помочь?' });
@@ -330,23 +449,13 @@ var Widget = function () {
                                         chatOpen = false;
 
                                         // удаляю прослушку события на кпонку закрытие
-                                        chatIdClose.removeEventListener('click', eventCloseChat);;
+                                        chatIdClose.removeEventListener('click', eventCloseChat);
 
                                         // вешаю прослушку события по header чата
                                         chatIdHead.addEventListener('click', eventOpenChat);
 
                                         console.log('Close');
                                 }
-                        }
-
-                        function getMessage() {}
-
-                        function showMessage(createdElem) {
-                                // Поиск элемента куда вставить 
-                                var divMsg = getElem('spchat__massages');
-
-                                // Вставляю в конец всех элементов в родителе
-                                divMsg.appendChild(createdElem);
                         }
 
                         function replyAi() {
@@ -358,7 +467,7 @@ var Widget = function () {
                                         var msg = сreateElement.createMessage(false, msgText);
 
                                         // показываю 
-                                        showMessage(msg);
+                                        showMessage.show(msg);
 
                                         // Добавляю в массив сообщение
                                         messageArray.push({ name: 'manager', msg: msgText });
@@ -396,6 +505,7 @@ var Widget = function () {
 
                         // Событие на загрузку документа
                         document.addEventListener('DOMContentLoaded', function () {
+
                                 setTimeout(function () {
                                         eventOpenChat();
                                         console.log('setTimeout - ok');
@@ -443,7 +553,7 @@ var Widget = function () {
                                                 // Создаю html разметку с собщением 
                                                 var msg = сreateElement.createMessage(true, this.value);
                                                 // 
-                                                showMessage(msg);
+                                                showMessage.show(msg);
                                                 messageArray.push({ name: 'user', msg: this.value });
 
                                                 // Ответа манагера
