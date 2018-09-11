@@ -1,0 +1,26 @@
+.form {
+    display: flex;
+    margin-bottom: 11px;
+    
+    &__input {
+        border: none;
+        background: white;
+        font-size: 12px;
+        line-height: 1.3;
+        padding: 9px 20px;
+        color: $footer-link;
+
+        &--email {
+            margin-right: 7px;
+            width: 216px;
+        }
+
+        &--submit {
+            background-color: $active-color;
+            cursor: pointer;
+            padding: 11px 13px 7px;
+        }
+    }
+
+  
+}

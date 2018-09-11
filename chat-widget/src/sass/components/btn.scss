@@ -1,0 +1,61 @@
+.btn__link {
+    position: absolute;
+    bottom: 26px;
+    left: 0;
+    padding: 7px 50px 7px 19px;
+    color: $grey;
+    background-color: $white;
+    text-decoration: none;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    letter-spacing: -0.3px;
+    line-height: 1.65;
+
+    &--br {
+        position: unset;
+        bottom: unset;
+        left: unset;
+        border-radius: 20px;
+        padding: 11px 56px 11px 35px;
+        margin-left: 9px;
+    }
+
+    &-svg {
+        position: absolute;
+        top: 14px;
+        right: 26px;
+
+        &--slider {
+            top: 4px;
+            right: -32px;
+        }
+    }
+    
+    &--icon {
+        position: relative;
+
+        &-excellence {
+            position: unset;
+        }
+     
+        &-arrow {
+            fill: $grey;
+        }
+    }
+
+    &--excellence {
+        position: unset;
+        display: inline-block;
+        padding: 7px 50px 7px 19px;
+        color: #757575;
+        background-color: #fff;
+        text-decoration: none;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        letter-spacing: -.3px;
+        line-height: 1.65;
+        font-size: 16px;
+    }
+
+
+}

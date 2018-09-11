@@ -1,0 +1,111 @@
+.service-core {
+    padding: 142px 0 92px;
+    background-image: url(../assets/img/bg-service.jpg);
+    background-repeat: no-repeat;
+    background-position: 1060px 163px;
+
+    &__item {
+        padding-left: 68px;
+        background-repeat: no-repeat;
+        background-size: 50px;
+        background-position: 7px 7px;
+        margin-bottom: 58px;
+    
+        &--build {
+            background-image: url(../assets/img/build.svg);
+        }
+    
+        &--bag {
+            background-image: url(../assets/img/bag.svg);
+            background-size: 49px;
+            background-position: 5px 9px;
+        }
+    
+        &--balance {
+            background-image: url(../assets/img/balance.svg);
+            background-position: 4px 5px;
+        }
+    
+        &--graph {
+            background-image: url(../assets/img/graph.svg);
+            background-position: 3px 8px;
+            background-size: 56px;
+        }
+    
+        &--lamp {
+            background-image: url(../assets/img/lamp.svg);
+            background-size: 38px;
+            background-position: 11px 3px;
+        }
+    
+        &--money {
+            background-image: url(../assets/img/money.svg);
+            background-size: 41px;
+            background-position: 10px 4px;
+        }
+    }
+
+    &__title {
+        text-transform: uppercase;
+        font-size: 22px;
+        font-family: 'montserrat';
+        font-weight: 700;
+        color: $service-header-font-color;
+        margin-bottom: 21px;
+        margin-top: 0;
+        padding-right: 16px;
+        letter-spacing: -0.4px;
+
+        &--center {
+            text-align: center;
+            margin-bottom: 62px;
+        }
+    }
+
+    &__desc {
+        font-size: 14px;
+        color: $main-color;
+        letter-spacing: 0.2px;
+        padding-right: 16px;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    &__name {
+        margin: 0 0 18px;
+        text-transform: uppercase;
+        font-size: 18px;
+        font-family: 'montserrat';
+        font-weight: 700;
+        color: $service-header-font-color;
+        letter-spacing: -0.3px;
+    }
+    
+    &__text {
+        margin: 10px 0;
+        font-size: 14px;
+        color: $main-color;
+        line-height: 1.75;
+        letter-spacing: 0.25px;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .service-core {
+        padding: 62px 0 46px;
+        background-size: 100%;
+    }
+}
+
+
+@media (max-width: 1200px) {
+    .service-core {
+        &__text {
+            max-width: 100%;
+        }
+    }
+}
+
+
+
