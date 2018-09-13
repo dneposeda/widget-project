@@ -10,8 +10,7 @@ export default class CreateStyleSheet {
         
         // let styleSheet = styleTag.sheet
 
-        //styleSheet.insertRule("\
-        // " ,0);
+        //styleSheet.insertRule(" h1 { font-style: italic } ", 0);
 
         styleTag.innerHTML = "\
             .spchat { display: flex; \
@@ -66,12 +65,7 @@ export default class CreateStyleSheet {
             @keyframes showMsgMng { from { left: -240px; } to { left: 0px; } } \
             @keyframes showMsgUser { from { right: -240px; } to { right: 0; } }";
 
-        console.log(styleTag);
-
-        // Вставляю <style> в head
+       // Вставляю <style> в head
         document.head.appendChild(styleTag);
     }
-
-
-
 }

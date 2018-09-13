@@ -2,14 +2,14 @@
 
 export default class CreateElement {
 
-    createBody(){
-
+    constructor(name, post, linkImg){
+        
         let tagBody = document.body;
 
         // Создаю <div> тела чата
         let divChat = document.createElement('div');
         divChat.className = 'spchat spchat-hidden';
-        divChat.setAttribute('id', 'spchat')
+        divChat.setAttribute('id', 'spchat');
 
         // Кнопка закрыть
         let divBtnClose = document.createElement('div');
@@ -27,7 +27,7 @@ export default class CreateElement {
                 // Фото менеджера
                 let divPhoto = document.createElement('img');
                 divPhoto.className = 'spchat__photo';
-                divPhoto.setAttribute('src', 'assets/img/news-01.jpg')
+                divPhoto.setAttribute('src', linkImg)
             divPhotoManager.appendChild(divPhoto);
         divHeader.appendChild(divPhotoManager);
             // Имя и должность менеджера
@@ -36,12 +36,12 @@ export default class CreateElement {
                 // Имя
                 let divName = document.createElement('div');
                 divName.className = 'spchat__manager-name';
-                divName.innerHTML = 'Артем Чичерин';
+                divName.innerHTML = name;
             divNameManager.appendChild(divName);
                 // Должность
                 let divPosition = document.createElement('div');
                 divPosition.className = 'spchat__manager-position';
-                divPosition.innerHTML = 'DB Engineer';
+                divPosition.innerHTML = post;
             divNameManager.appendChild(divPosition);
         divHeader.appendChild(divNameManager);
         divChat.appendChild(divHeader);
@@ -57,7 +57,6 @@ export default class CreateElement {
         divBody.appendChild(divMsg);
         divChat.appendChild(divBody);
 
-        
         // Секция отправки сообщения
         let divFooter = document.createElement('div');
         divFooter.className = 'spchat__footer';
@@ -71,11 +70,8 @@ export default class CreateElement {
         divFooter.appendChild(divFooterText);
         divChat.appendChild(divFooter);
 
-
         // Вставляю в конец всех элементов в родителе BODY
         tagBody.appendChild(divChat);
-        
-        return divChat;
     }
     
     // Создание html блока сообщения
