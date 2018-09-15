@@ -1,0 +1,27 @@
+.User {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 1);
+    transition: background .1s ease-in-out;
+
+    &-identification {
+        margin-left: 35px;
+    }
+
+    &:hover {
+        background: rgba(68, 99, 113, 1);
+    }
+
+   /*  &:before {
+        content: '';
+        position: absolute;
+        top: 12px;
+        left: 5px;
+        width: 25px;
+        height: 25px;
+        background: #446371;
+        border-radius: 50%;
+    } */
+}
