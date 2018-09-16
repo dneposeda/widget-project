@@ -1,7 +1,7 @@
 version: '2'
 services:
   widget-client:
-    build: ./client-frontend
+    build: ./manager-frontend
     ports:
-    - "8085:8085"
+    - "8083:8083"
     
