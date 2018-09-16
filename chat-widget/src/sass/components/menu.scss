@@ -1,0 +1,54 @@
+.menu {
+    padding: 0;
+    margin: 0;
+    display: flex;
+
+    &__item {
+        list-style: none;
+    }
+
+    &__link {
+        display: block;
+        padding: 15px 11px;
+        text-decoration: none;
+        font-size: 13px;
+        line-height: 1.2
+    }
+
+    &__link--grey {
+        color: $menu-font-color;
+    }
+
+    &__link--mr {
+        margin-right: -3px;
+    }
+    
+}
+
+
+
+
+.menu__humberger {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    position: absolute;
+    padding-top: 40px;
+    top: 0px;
+    right: 0;
+    border-top-right-radius: 25px;
+    z-index: 5;
+    display: none;
+
+    &--active {
+        display: block;
+    }
+
+    a {
+        color: #222;
+        padding: 15px 70px;
+    }
+}
+
+
+

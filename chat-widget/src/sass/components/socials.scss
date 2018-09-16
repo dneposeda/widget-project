@@ -1,0 +1,62 @@
+.social {
+    margin-bottom: 10px;
+
+    &__list {
+        margin: 0 0 30px 1px;
+        padding: 0;
+        display: flex;
+    }
+
+    &__item {
+        list-style: none;
+        margin-right: 8px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    &__link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 37px;
+        height: 35px;
+        background-color: $social-bg;
+        transition: background-color 0.5s;
+
+        &:hover {
+            background-color: $social-bg-active;
+            animation-duration: 0.7s;
+            animation-fill-mode: both;
+            animation-name: rotateIn;
+
+            .social__link-icon {
+                fill: $white;
+            }
+        }
+
+        &-icon{
+            fill: $social-icon;
+            transition: fill 0.5s;
+        }
+    }
+}
+
+.icon {
+    fill: $white;
+}
+
+
+@keyframes rotateIn {
+    from {
+        transform-origin: center;
+        transform: rotate3d(0, 0, 1, -200deg);
+    }
+
+    to {
+        transform-origin: center;
+        transform: translate3d(0, 0, 0);
+    }
+}
+  

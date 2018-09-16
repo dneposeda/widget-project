@@ -8,6 +8,6 @@ COPY package-lock.json ./
 COPY server.js ./
 RUN npm install
 
-EXPOSE 8080
+EXPOSE 8085
 
 CMD [ "node", "server.js" ]

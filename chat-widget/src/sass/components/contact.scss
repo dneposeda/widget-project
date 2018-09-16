@@ -1,0 +1,58 @@
+.contact__list {
+    margin: 0 0 30px;
+    padding: 0;
+}
+
+.contact__item {
+    list-style: none;
+    border-top: 1px solid rgba(255,255,255, 0.05);
+}
+
+
+.contact__link {
+    display: flex;
+    padding: 8px 0 11px;
+    text-decoration: none;
+    color: $footer-link;
+    transition: color 0.3s;
+    font-size: 13px;
+    line-height: 1.7;
+    letter-spacing: 0.2px;
+
+    svg {
+        margin-right: 11px;
+        margin-top: 4px;
+    }
+
+    &:hover {
+        color: $white;
+
+        .contact__link-icon {
+            fill: $white;
+            opacity: 1;
+        }
+
+    }
+
+    &--phone {
+        padding-bottom: 15px;
+    }
+
+    &--address {
+        width: 210px;
+
+        svg {
+            margin-top: -5px;
+            margin-left: 0px;
+        }
+    }
+
+
+    &-icon {
+        fill: $social-icon;
+        opacity: 0.6;
+        transition: all 0.3s;
+    }
+}
+
+
