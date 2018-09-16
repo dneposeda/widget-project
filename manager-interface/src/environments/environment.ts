@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  TEST_CHAT_URL: 'ws://echo.websocket.org/',
+  PROD_CHAT_URL: 'ws://vipzavarnik.ru:3001/'
 };
 
 /*

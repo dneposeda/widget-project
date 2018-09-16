@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './components/user/user.component';
 import { MessageComponent } from './components/message/message.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {path: 'users/:id', component: ChatComponent},
@@ -20,7 +21,9 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

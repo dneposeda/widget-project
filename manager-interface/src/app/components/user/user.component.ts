@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { WebsocketService } from '../../services/websocket.service';
 
 @Component({
   selector: 'app-user',
@@ -6,13 +7,15 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  @Input() public user: object;
-  @Input()  public messages: any[];
-  public id: number;
+  @Input() public user;
 
-  constructor() { }
+  constructor(private _websocketService: WebsocketService) { }
 
   ngOnInit() {
+  }
+
+  onClick () {
+    this._websocketService.setUserInTouch(this.user.id);
   }
 
 }
