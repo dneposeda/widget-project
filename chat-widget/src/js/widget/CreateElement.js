@@ -47,28 +47,31 @@ export default class CreateElement {
         divChat.appendChild(divHeader);
 
         // Секция самого чата 
-        let divBody = document.createElement('div');
-        divBody.className = 'spchat__body';
-        divBody.setAttribute('id', 'spchat__body')
-            // Обертка для сообщений
-            let divMsg = document.createElement('div');
-            divMsg.className = 'spchat__massages';
-            divMsg.setAttribute('id', 'spchat__massages')
-        divBody.appendChild(divMsg);
-        divChat.appendChild(divBody);
+        let divHidden2 = document.createElement('div');
+        divHidden2.className = 'spchat-hidden2';
+            let divBody = document.createElement('div');
+            divBody.className = 'spchat__body';
+            divBody.setAttribute('id', 'spchat__body')
+                // Обертка для сообщений
+                let divMsg = document.createElement('div');
+                divMsg.className = 'spchat__massages';
+                divMsg.setAttribute('id', 'spchat__massages')
+            divBody.appendChild(divMsg);
+            divHidden2.appendChild(divBody);
 
-        // Секция отправки сообщения
-        let divFooter = document.createElement('div');
-        divFooter.className = 'spchat__footer';
-            // Textarea отправки сообщения
-            let divFooterText = document.createElement('textarea');
-            divFooterText.className = 'spchat__textarea';
-            divFooterText.setAttribute('id', 'sendMessage');
-            divFooterText.setAttribute('placeholder', 'Введите сообщение и нажмите Enter');
-            divFooterText.setAttribute('autocomplete', 'off');
-            divFooterText.setAttribute('maxlength', '1000');
-        divFooter.appendChild(divFooterText);
-        divChat.appendChild(divFooter);
+            // Секция отправки сообщения
+            let divFooter = document.createElement('div');
+            divFooter.className = 'spchat__footer';
+                // Textarea отправки сообщения
+                let divFooterText = document.createElement('textarea');
+                divFooterText.className = 'spchat__textarea';
+                divFooterText.setAttribute('id', 'sendMessage');
+                divFooterText.setAttribute('placeholder', 'Введите сообщение и нажмите Enter');
+                divFooterText.setAttribute('autocomplete', 'off');
+                divFooterText.setAttribute('maxlength', '1000');
+            divFooter.appendChild(divFooterText);
+            divHidden2.appendChild(divFooter);
+        divChat.appendChild(divHidden2);
 
         // Вставляю в конец всех элементов в родителе BODY
         tagBody.appendChild(divChat);

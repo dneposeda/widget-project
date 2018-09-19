@@ -128,8 +128,40 @@ var _widget2 = _interopRequireDefault(_widget);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// Получаю живую колекцию <script> 
+var scripts = document.getElementsByTagName('script');
+var myScript = scripts[scripts.length - 1];
+// С помощью регулярного выражения удаляю левую часть url
+var queryString = myScript.src.replace(/^[^\?]+\??/, '');
+
+var params = parseQuery(queryString);
+
+function parseQuery(query) {
+
+    var Params = new Object();
+
+    if (!query) {
+        return Params;
+    }
+
+    var Pairs = query.split(/[;&]/);
+
+    for (var i = 0; i < Pairs.length; i++) {
+
+        var KeyVal = Pairs[i].split('=');
+
+        if (!KeyVal || KeyVal.length != 2) continue;
+
+        var key = KeyVal[0];
+        var val = KeyVal[1];
+
+        Params[key] = val;
+    }
+    return Params;
+}
+
 var widget = new _widget2.default();
-widget.init();
+widget.init(params.position);
 
 /***/ }),
 
@@ -198,6 +230,8 @@ var CreateElement = function () {
         divChat.appendChild(divHeader);
 
         // Секция самого чата 
+        var divHidden2 = document.createElement('div');
+        divHidden2.className = 'spchat-hidden2';
         var divBody = document.createElement('div');
         divBody.className = 'spchat__body';
         divBody.setAttribute('id', 'spchat__body');
@@ -206,7 +240,7 @@ var CreateElement = function () {
         divMsg.className = 'spchat__massages';
         divMsg.setAttribute('id', 'spchat__massages');
         divBody.appendChild(divMsg);
-        divChat.appendChild(divBody);
+        divHidden2.appendChild(divBody);
 
         // Секция отправки сообщения
         var divFooter = document.createElement('div');
@@ -219,7 +253,8 @@ var CreateElement = function () {
         divFooterText.setAttribute('autocomplete', 'off');
         divFooterText.setAttribute('maxlength', '1000');
         divFooter.appendChild(divFooterText);
-        divChat.appendChild(divFooter);
+        divHidden2.appendChild(divFooter);
+        divChat.appendChild(divHidden2);
 
         // Вставляю в конец всех элементов в родителе BODY
         tagBody.appendChild(divChat);
@@ -273,74 +308,52 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var CreateStyleSheet = function CreateStyleSheet() {
-    _classCallCheck(this, CreateStyleSheet);
+var CreateStyleSheet = function () {
+    function CreateStyleSheet() {
+        _classCallCheck(this, CreateStyleSheet);
 
-    // Создаю <style>
-    var styleTag = document.createElement('style');
+        // Создаю <style>
+        var styleTag = document.createElement('style');
 
-    // let styleSheet = styleTag.sheet
+        styleTag.innerHTML = '\n            .spchat { display: flex; z-index: 10;\n                flex-direction: column; position: fixed;\n                /* right: 30px; bottom: 10px;*/ width: 300px; height: 400px;\n                font-size: 14px; font-family: Arial, Helvetica, sans-serif;\n                box-shadow: 0 12px 25px 8px rgba(0, 0, 0, 0.17);\n                transition: all 0.3s cubic-bezier(0.39, 0.24, 0.21, 0.99);\n                transform-origin: 0 100%; overflow: hidden; }\n            .spchat__close { position: absolute; right: 10px; top: 10px; width: 26px;\n                height: 26px; border-radius: 50%; border: 2px solid #333;\n                background-color: #fff; cursor: pointer; box-sizing: border-box; }\n            .spchat__close:before, .spchat__close:after { position: absolute;\n                left: 10px; top: 5px; content: \'\'; height: 12px; width: 2px;\n                background-color: #333; }\n            .spchat__close:before { transform: rotate(45deg); }\n            .spchat__close:after { transform: rotate(-45deg); }\n            .spchat__header { display: flex; align-items: center; background-color: #23283c;\n                border-radius: 3px 3px 0 0; color: #f0f1f1; padding: 20px;\n                min-height: 75px; box-sizing: border-box; }\n            .spchat__photo { display: block; border-radius: 50%; margin-right: 20px;\n                height: 50px; width: 50px; }\n            .spchat__manager-name { margin-bottom: 5px; }\n            .spchat__manager-position { font-size: 12px; opacity: 0.7; }\n            .spchat__body { background-color: #fff; height: 245px; overflow-x: hidden;\n                overflow-y: scroll; padding: 10px 5px; }\n            .spchat__massage-wrap { position: relative; margin: 5px 0; }\n            .spchat__massage-wrap:after { visibility: hidden; display: block;\n                font-size: 0; content: \'\'; clear: both; height: 0; }\n            .spchat__footer { min-height: 80px; background-color: #eef1f5;\n                padding: 10px 15px; }\n            .spchat__textarea {height: 60px; padding: 5px; overflow: hidden;\n                overflow-y: auto; width: 270px; border: 1px solid #299f53;\n                border-radius: 3px; resize: none; color: #545d6b;\n                margin-bottom: 10px; line-height: 15px; box-sizing: border-box; }\n            .spchat-hidden { height: 70px; cursor: pointer; }\n            .spchat-hidden2 { transition: all 0.3s; transform-origin: top;\n                transform: scaleY(1); }\n            .spchat-hidden .spchat-hidden2 { transform: scaleY(0); }\n            .rb { right: 30px; bottom: 10px;}\n            .lb { left: 30px; bottom: 10px;}\n            .rt { right: 30px; top: 10px;}\n            .lt { left: 30px; top: 10px;}\n            .spchat__massage { color: #f0f1f1; border-radius: 3px;\n                background-color: #e4eefd; width: 85%; /*max-width: 210px;*/\n                padding: 7px 11px; margin: 5px 0; margin-right: 11px;\n                animation-duration: 0.4s; animation-timing-function: cubic-bezier(0, 0.79, 0.34, 1.38); }\n            .spchat__massage:after { content: \'\'; position: absolute; width: 0;\n                height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }\n            .spchat__massage--manager { position: relative; background-color: #3cb868;\n                float: left; text-align: left; margin-left: 11px;\n                animation-name: showMsgMng; }\n            .spchat__massage--manager:after { left: -4px; top: 5px;\n                border-right: 5px solid #3cb868; }\n            .spchat__massage--user { position: relative; background-color: #e4eefd;\n                float: right; color: #414243; text-align: right; margin-right: 11px;\n                animation-name: showMsgUser; }\n            .spchat__massage--user:after { right: -5px; top: 5px; border-left: 5px solid #e4eefd; }\n            @keyframes showMsgMng { from { left: -240px; } to { left: 0px; } }\n            @keyframes showMsgUser { from { right: -240px; } to { right: 0; } }';
 
-    //styleSheet.insertRule(" h1 { font-style: italic } ", 0);
+        // Вставляю <style> в head
+        document.head.appendChild(styleTag);
+    }
 
-    styleTag.innerHTML = "\
-            .spchat { display: flex; \
-                flex-direction: column; position: fixed;\
-                right: 30px; bottom: 10px; width: 300px; height: 400px;\
-                font-size: 14px; font-family: Arial, Helvetica, sans-serif;\
-                box-shadow: 0 12px 25px 8px rgba(0, 0, 0, 0.17);\
-                transition: all 0.3s cubic-bezier(0.39, 0.24, 0.21, 0.99);\
-                transform-origin: 0 100%; overflow: hidden; }\
-            .spchat__close { position: absolute; right: 10px; top: 10px; width: 26px;\
-                height: 26px; border-radius: 50%; border: 2px solid #333;\
-                background-color: #fff; cursor: pointer; }\
-            .spchat__close:before, .spchat__close:after { position: absolute;\
-                left: 10px; top: 5px; content: ''; height: 12px; width: 2px;\
-                background-color: #333; }\
-            .spchat__close:before { transform: rotate(45deg); }\
-            .spchat__close:after { transform: rotate(-45deg); }\
-            .spchat__header { display: flex; align-items: center; background-color: #23283c;\
-                border-radius: 3px 3px 0 0; color: #f0f1f1; padding: 20px;\
-                min-height: 75px; }\
-            .spchat__photo { display: block; border-radius: 50%; margin-right: 20px;\
-                height: 50px; width: 50px; }\
-            .spchat__manager-name { margin-bottom: 5px; }\
-            .spchat__manager-position { font-size: 12px; opacity: 0.7; }\
-            .spchat__body { background-color: #fff; height: 245px; overflow-x: hidden;\
-                overflow-y: scroll; padding: 10px 5px; }\
-            .spchat__massage-wrap { position: relative; margin: 5px 0; }\
-            .spchat__massage-wrap:after { visibility: hidden; display: block;\
-                font-size: 0; content: ''; clear: both; height: 0; }\
-            .spchat__footer { min-height: 80px; background-color: #eef1f5;\
-                padding: 10px 15px; }\
-            .spchat__textarea {height: 60px; padding: 5px; overflow: hidden;\
-                overflow-y: auto; width: 270px; border: 1px solid #299f53;\
-                border-radius: 3px; resize: none; color: #545d6b;\
-                margin-bottom: 10px; line-height: 15px; }\
-            .spchat-hidden { bottom: -330px; cursor: pointer; }\
-            .spchat__massage { color: #f0f1f1; border-radius: 3px;\
-                background-color: #e4eefd; width: 80%; max-width: 210px;\
-                padding: 7px 11px; margin: 5px 0; margin-right: 11px;\
-                animation-duration: 0.4s; animation-timing-function: cubic-bezier(0, 0.79, 0.34, 1.38); }\
-            .spchat__massage:after { content: ''; position: absolute; width: 0;\
-                height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }\
-            .spchat__massage--manager { position: relative; background-color: #3cb868;\
-                float: left; text-align: left; margin-left: 11px;\
-                animation-name: showMsgMng; }\
-            .spchat__massage--manager:after { left: -5px; top: 5px;\
-                border-right: 5px solid #3cb868; }\
-            .spchat__massage--user { position: relative; background-color: #e4eefd;\
-                float: right; color: #414243; text-align: right; margin-right: 11px;\
-                animation-name: showMsgUser; }\
-            .spchat__massage--user:after { right: -5px; top: 5px; border-left: 5px solid #e4eefd; }\
-            @keyframes showMsgMng { from { left: -240px; } to { left: 0px; } } \
-            @keyframes showMsgUser { from { right: -240px; } to { right: 0; } }";
+    _createClass(CreateStyleSheet, [{
+        key: 'getClassPosition',
+        value: function getClassPosition(pos) {
+            var divChat = document.getElementById('spchat');
+            // let styleSheet = styleTag.sheet
 
-    // Вставляю <style> в head
-    document.head.appendChild(styleTag);
-};
+            switch (pos) {
+                case 'lb':
+                    // styleSheet.insertRule(" .lb {left: 30px; bottom: 10px;} ", 0);
+                    divChat.classList.add('lb');
+                    break;
+                case 'rt':
+                    // styleSheet.insertRule(" .rt { font-style: italic } ", 0);
+                    divChat.classList.add('rt');
+                    break;
+                case 'lt':
+                    // styleSheet.insertRule(" .lt { font-style: italic } ", 0);
+                    divChat.classList.add('lt');
+                    break;
+                default:
+                    console.log('Стиль по умолчанию');
+                    // styleSheet.insertRule(" .rb {right: 30px; bottom: 10px;} ", 0);
+                    divChat.classList.add('rb');
+            }
+        }
+    }]);
+
+    return CreateStyleSheet;
+}();
 
 exports.default = CreateStyleSheet;
 
@@ -397,6 +410,34 @@ var EventOpenCloseChat = function () {
 }();
 
 exports.default = EventOpenCloseChat;
+
+/***/ }),
+
+/***/ "./src/js/widget/Message.js":
+/*!**********************************!*\
+  !*** ./src/js/widget/Message.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Message = function Message(type, data, text) {
+    _classCallCheck(this, Message);
+
+    this.data = data;
+    this.text = text;
+    this.type = type;
+};
+
+exports.default = Message;
 
 /***/ }),
 
@@ -482,6 +523,39 @@ exports.default = ShowMessage;
 
 /***/ }),
 
+/***/ "./src/js/widget/User.js":
+/*!*******************************!*\
+  !*** ./src/js/widget/User.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _Message = __webpack_require__(/*! ./Message */ "./src/js/widget/Message.js");
+
+var _Message2 = _interopRequireDefault(_Message);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var User = function User(id, type, data, text) {
+    _classCallCheck(this, User);
+
+    this.id = id;
+    this.messages = [new _Message2.default(type, data, text)];
+};
+
+exports.default = User;
+
+/***/ }),
+
 /***/ "./src/js/widget/widget.js":
 /*!*********************************!*\
   !*** ./src/js/widget/widget.js ***!
@@ -518,6 +592,10 @@ var _EventOpenCloseChat = __webpack_require__(/*! ./EventOpenCloseChat */ "./src
 
 var _EventOpenCloseChat2 = _interopRequireDefault(_EventOpenCloseChat);
 
+var _User = __webpack_require__(/*! ./User */ "./src/js/widget/User.js");
+
+var _User2 = _interopRequireDefault(_User);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -525,11 +603,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var Widget = function () {
         function Widget() {
                 _classCallCheck(this, Widget);
+
+                // Проверка поддержки WebSocket 
+                if (!window.WebSocket) {
+                        document.body.innerHTML = 'WebSocket is not supported in this browser.';
+                }
+                // 
+                this.socket = new WebSocket('ws://localhost:3001');
+
+                // Получаю из localStorage значение
+                this.storageIdUser = localStorage.getItem('widget-user');
+                // Если нет, устанавливаю
+                if (!this.storageIdUser) {
+                        localStorage.setItem('widget-user', '' + String(Math.random()).slice(2) + Date.now());
+                        this.storageIdUser = localStorage.getItem('widget-user');
+                }
+
+                // Ищю кнопку textarea
+                this.sendMessage = document.getElementById('sendMessage');
         }
 
         _createClass(Widget, [{
                 key: 'init',
-                value: function init() {
+                value: function init(posWidget) {
+
+                        var id = void 0;
 
                         // Класс создания и подключения <style>
                         var createStyleSheet = new _CreateStyleSheet2.default();
@@ -546,6 +644,9 @@ var Widget = function () {
                         //
                         var eventOpenCloseChat = new _EventOpenCloseChat2.default();
 
+                        //
+                        createStyleSheet.getClassPosition(posWidget);
+
                         function firstMsg(message) {
 
                                 setTimeout(function () {
@@ -558,25 +659,27 @@ var Widget = function () {
                                 }, 700);
                         }
 
-                        function replyAi() {
-                                setTimeout(function () {
-                                        // генерирую случайное число, по которому выбираю сообщение из массива
-                                        var msgText = arrayMesgAi[randomMessage.random(arrayMesgAi.length - 1)];
+                        // function replyAi(){
+                        //     setTimeout(function(){
+                        //         // генерирую случайное число, по которому выбираю сообщение из массива
+                        //         let msgText = arrayMesgAi[ randomMessage.random(arrayMesgAi.length-1) ]; 
 
-                                        // создаю HTML сообщения
-                                        var msg = сreateElement.createMessage(false, msgText);
+                        //         // создаю HTML сообщения
+                        //         let msg = сreateElement.createMessage(false, msgText);
 
-                                        // показываю 
-                                        showMessage.show(msg);
+                        //         // показываю 
+                        //         showMessage.show(msg);
 
-                                        // Добавляю в массив сообщение
-                                        messageArray.push({ name: 'manager', msg: msgText });
+                        //         // Добавляю в массив сообщение
+                        //         messageArray.push({name: 'manager', msg: msgText})
 
-                                        // Автопрокрутка скролла
-                                        var scrollBodyMessage = document.getElementById('spchat__body');
-                                        scrollBodyMessage.scrollTop = scrollBodyMessage.scrollHeight;
-                                }, 1000);
-                        }
+                        //         // Автопрокрутка скролла
+                        //         let scrollBodyMessage = document.getElementById('spchat__body');
+                        //         scrollBodyMessage.scrollTop = scrollBodyMessage.scrollHeight;
+
+                        //     }, 1000)
+
+                        // }
                         /**************START******************/
 
                         // Флаг online
@@ -668,28 +771,35 @@ var Widget = function () {
                                 }
                         };
 
-                        // Ищю кнопку textarea
-                        var sendMessage = document.getElementById('sendMessage');
-
                         // Вешаю событиние на Enter
-                        sendMessage.addEventListener('keydown', function (e) {
+                        sendMessage.addEventListener('keydown', listenerSendMessage.bind(this));
+
+                        function listenerSendMessage(event) {
 
                                 // Если нажата кнопка Enter(13)
-                                if (e.keyCode === 13) {
+                                if (event.keyCode === 13) {
+
                                         // Отменяю перенос строки, действие по умолчанию
-                                        e.preventDefault();
+                                        event.preventDefault();
 
                                         // Если сообщение не пустое
-                                        if (this.value !== '') {
+                                        if (event.target.value !== '') {
 
                                                 // Создаю html разметку с собщением 
-                                                var msg = сreateElement.createMessage(true, this.value);
-                                                // 
+                                                var msg = сreateElement.createMessage(true, event.target.value);
+
+                                                // Показываю в чате
                                                 showMessage.show(msg);
-                                                messageArray.push({ name: 'user', msg: this.value });
+                                                // Добавляю в локальный массив
+                                                messageArray.push({ name: 'user', msg: event.target.value });
+
+                                                // Отправляю сообщение по websocket
+                                                var msgString = JSON.stringify(new _User2.default(this.storageIdUser, 'user', Date.now(), event.target.value));
+
+                                                this.socket.send(msgString);
 
                                                 // Ответа манагера
-                                                replyAi();
+                                                // replyAi();
                                         }
 
                                         // Автопрокрутка скролла
@@ -699,7 +809,23 @@ var Widget = function () {
                                         // Сбрасываю значение поля
                                         sendMessage.value = '';
                                 }
-                        });
+                        }
+
+                        this.socket.onmessage = function (event) {
+
+                                var messageFromManager = JSON.parse(event.data);
+
+                                var msg = сreateElement.createMessage(false, messageFromManager.messages[0].message);
+                                showMessage.show(msg);
+
+                                // Добавляем в локальный массив переписки
+                                messageArray.push({ name: 'manager', msg: messageFromManager.messages[0].message });
+                                console.log(messageArray);
+
+                                // Автопрокрутка скролла
+                                var scrollBodyMessage = document.getElementById('spchat__body');
+                                scrollBodyMessage.scrollTop = scrollBodyMessage.scrollHeight;
+                        };
                 }
         }]);
 

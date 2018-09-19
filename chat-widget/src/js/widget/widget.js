@@ -5,11 +5,34 @@ import RandomMessage from './RandomMessage';
 import CreateElement from './CreateElement';
 import ShowMessage from './ShowMessage';
 import EventOpenCloseChat from './EventOpenCloseChat';
-
+import User from './User';
 
 export default class Widget {
 
-    init(){
+    constructor(){
+        // Проверка поддержки WebSocket 
+        if (!window.WebSocket) {
+            document.body.innerHTML = 'WebSocket is not supported in this browser.';
+        }
+        // 
+        this.socket = new WebSocket('ws://localhost:3001');
+
+        // Получаю из localStorage значение
+        this.storageIdUser = localStorage.getItem('widget-user');
+        // Если нет, устанавливаю
+        if (!this.storageIdUser) {
+            localStorage.setItem('widget-user', `${String(Math.random()).slice(2)}${Date.now()}`)
+            this.storageIdUser = localStorage.getItem('widget-user')
+        }
+ 
+        // Ищю кнопку textarea
+        this.sendMessage = document.getElementById('sendMessage');
+        
+    }
+
+    init(posWidget){
+
+        let id;
 
         // Класс создания и подключения <style>
         let createStyleSheet  = new CreateStyleSheet();
@@ -26,6 +49,9 @@ export default class Widget {
         //
         let eventOpenCloseChat = new EventOpenCloseChat();
 
+        //
+        createStyleSheet.getClassPosition(posWidget);
+
         function firstMsg(message){
 
             setTimeout(function(){
@@ -38,27 +64,27 @@ export default class Widget {
             }, 700);
         }
 
-        function replyAi(){
-            setTimeout(function(){
-                // генерирую случайное число, по которому выбираю сообщение из массива
-                let msgText = arrayMesgAi[ randomMessage.random(arrayMesgAi.length-1) ]; 
+        // function replyAi(){
+        //     setTimeout(function(){
+        //         // генерирую случайное число, по которому выбираю сообщение из массива
+        //         let msgText = arrayMesgAi[ randomMessage.random(arrayMesgAi.length-1) ]; 
              
-                // создаю HTML сообщения
-                let msg = сreateElement.createMessage(false, msgText);
+        //         // создаю HTML сообщения
+        //         let msg = сreateElement.createMessage(false, msgText);
 
-                // показываю 
-                showMessage.show(msg);
+        //         // показываю 
+        //         showMessage.show(msg);
 
-                // Добавляю в массив сообщение
-                messageArray.push({name: 'manager', msg: msgText})
+        //         // Добавляю в массив сообщение
+        //         messageArray.push({name: 'manager', msg: msgText})
 
-                // Автопрокрутка скролла
-                let scrollBodyMessage = document.getElementById('spchat__body');
-                scrollBodyMessage.scrollTop = scrollBodyMessage.scrollHeight;
+        //         // Автопрокрутка скролла
+        //         let scrollBodyMessage = document.getElementById('spchat__body');
+        //         scrollBodyMessage.scrollTop = scrollBodyMessage.scrollHeight;
 
-            }, 1000)
+        //     }, 1000)
 
-        }
+        // }
         /**************START******************/
 
         // Флаг online
@@ -162,28 +188,36 @@ export default class Widget {
 
         };
 
-        // Ищю кнопку textarea
-        let sendMessage = document.getElementById('sendMessage');
 
         // Вешаю событиние на Enter
-        sendMessage.addEventListener('keydown', function(e){
+        sendMessage.addEventListener('keydown', listenerSendMessage.bind(this));
+      
+        function listenerSendMessage(event){
 
             // Если нажата кнопка Enter(13)
-            if (e.keyCode === 13) {
+            if (event.keyCode === 13) {
+
                 // Отменяю перенос строки, действие по умолчанию
-                e.preventDefault();
+                event.preventDefault();
 
                 // Если сообщение не пустое
-                if( this.value !== '') {
+                if( event.target.value !== '') {
 
                     // Создаю html разметку с собщением 
-                    let msg = сreateElement.createMessage(true, this.value);
-                    // 
-                    showMessage.show(msg);
-                    messageArray.push({name: 'user', msg: this.value})
+                    let msg = сreateElement.createMessage(true, event.target.value);
+
+                    // Показываю в чате
+                    showMessage.show(msg); 
+                    // Добавляю в локальный массив
+                    messageArray.push({name: 'user', msg: event.target.value})
+
+                    // Отправляю сообщение по websocket
+                    let msgString = JSON.stringify(new User(this.storageIdUser,  'user', Date.now(), event.target.value))
+
+                    this.socket.send(msgString);
                 
                     // Ответа манагера
-                    replyAi();
+                    // replyAi();
                 }
 
                 // Автопрокрутка скролла
@@ -192,8 +226,32 @@ export default class Widget {
 
                 // Сбрасываю значение поля
                 sendMessage.value = '';
-
             }
-        });
-    }
+        }
+
+
+        this.socket.onmessage = event => {
+            
+            
+            let messageFromManager = JSON.parse(event.data);
+
+            let msg = сreateElement.createMessage(false, messageFromManager.messages[0].message);
+            showMessage.show(msg);
+
+            // Добавляем в локальный массив переписки
+            messageArray.push({name: 'manager', msg: messageFromManager.messages[0].message})
+            console.log(messageArray);
+            
+            // Автопрокрутка скролла
+            let scrollBodyMessage = document.getElementById('spchat__body');
+            scrollBodyMessage.scrollTop = scrollBodyMessage.scrollHeight;
+            
+        };
+
+  
+    };
+
+
+    
 }
+
