@@ -6,6 +6,6 @@ var server = createServer((req, res) => {
 	file.serve(req, res);
 })
 
-server.listen(8085);
+server.listen(8083);
 
-console.log('Clients\'s server running on port 8085');
+console.log('Manager\'s server running on port 8083');
