@@ -1,0 +1,17 @@
+<!-- Here "MI" stands for "Manager Interface" -->
+<div class="MI-container">
+  <ul class="MI-userList">
+    <ng-container *ngFor="let user of users">
+      <li *ngIf="user.online">
+        <app-user [user]="user"></app-user>
+      </li>
+    </ng-container>
+  </ul>
+  <div class="MI-communicationArea">
+      <router-outlet></router-outlet>
+    <!-- <div class="MI-messagePool">
+      
+    </div> -->
+      <input [formControl]="messageControl" class="MI-input" type="text" placeholder="Write a message..." (keydown.enter)="sendMessage()">
+  </div>
+</div>

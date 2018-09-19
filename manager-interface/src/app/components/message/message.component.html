@@ -1,0 +1,7 @@
+<div [ngClass]="{
+  'Message': true,
+  'Message--manager': sender === 'manager' ? true : false,
+  'Message--user': sender === 'user' ? true : false
+}">
+{{message}}
+</div>

@@ -1,0 +1,17 @@
+.Message {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 15px;
+    color: rgb(236, 229, 229);
+    margin-bottom: 10px;
+    max-width: 300px;    
+
+    &--user {
+        background: rgba(34, 90, 116, 1);
+    }
+
+    &--manager {
+        background: rgba(36, 142, 190, 1);
+        margin-left: 20px;
+    }
+}

@@ -1,0 +1,16 @@
+.Chat {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding-left: 7px;
+    justify-content: flex-end;
+}
+
+:host {
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding-left: 7px;
+    justify-content: flex-end;
+}
